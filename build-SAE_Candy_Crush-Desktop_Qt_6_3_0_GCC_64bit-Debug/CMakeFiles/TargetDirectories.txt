@@ -1,0 +1,3 @@
+/amuhome/t23018992/Documents/SAE/build-SAE_Candy_Crush-Desktop_Qt_6_3_0_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/amuhome/t23018992/Documents/SAE/build-SAE_Candy_Crush-Desktop_Qt_6_3_0_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/amuhome/t23018992/Documents/SAE/build-SAE_Candy_Crush-Desktop_Qt_6_3_0_GCC_64bit-Debug/CMakeFiles/SAE_Candy_Crush.dir
