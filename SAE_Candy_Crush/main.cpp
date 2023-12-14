@@ -93,29 +93,12 @@ void explositionUneBombeHorizontale (CMatrice & mat, const size_t & numLigne,
 
 void explositionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,
                                    const size_t & numColonne, const size_t & aLaSuite){
-    size_t j = numColonne;
 
-    for (size_t i = numLigne + aLaSuite - 1; i >= numLigne && i < mat.size(); --i) {
-          //cout << "Valeur à la position [" << i+1 << "][" << j+1 << "]: " << mat[i][j] << endl;
-          mat[i][j] = mat[i-aLaSuite][j];
-          mat[i-aLaSuite][j] = 0;
-          cout << "Valeur à la position [" << i+1 << "][" << j+1 << "]: " << mat[i][j] << endl;
-          if (i-aLaSuite < 1) {
-               mat[i-1][j] = 0;
-              break;
-          }
-
+    cout << numLigne << "   " << numColonne << "    " << aLaSuite ;
+    for (size_t i = numLigne+1 ; i > 0  ; --i){
+        mat[i+aLaSuite][numColonne] = mat[i][numColonne];
+        mat[i][numColonne] = 0 ;
     }
-
-
-}
-
-void casserVertical(){
-
-}
-
-void remplirVertical(){
-
 }
 
 bool detectionExplositionUneBombeHorizontale (CMatrice & mat){
