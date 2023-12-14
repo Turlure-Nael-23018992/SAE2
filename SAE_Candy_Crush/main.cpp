@@ -2,36 +2,12 @@
 #include <vector>
 #include <iomanip>
 #include <cstdlib>
+#include <type.h>
+#include <cst.h>
+#include <affichage.h>
 
 using namespace std;
 
-void clearScreen () {
-    cout << "\033[H\033[2J";
-}
-
-const unsigned KReset   (0);
-const unsigned KNoir    (30);
-const unsigned KRouge   (31);
-const unsigned KVert    (32);
-const unsigned KJaune   (33);
-const unsigned KBleu    (34);
-const unsigned KMAgenta (35);
-const unsigned KCyan    (36);
-const unsigned KBGNoir  (40);
-const unsigned KBGRouge (41);
-const unsigned KGBBleu  (44);
-const unsigned KBGCyan  (46);
-
-void couleur (const unsigned & coul) {
-    cout << "\033[" << coul <<"m";
-}
-
-typedef ushort contenueDUneCase;
-typedef vector <contenueDUneCase> CVLigne; // un type représentant une ligne de la grille
-typedef vector <CVLigne> CMatrice; // un type représentant la grille
-
-const contenueDUneCase KAIgnorer = 0;
-const contenueDUneCase KPlusGrandNombreDansLaMatrice = 4;
 
 void initMat (CMatrice & mat, const size_t & nbLignes = 10,
               const size_t & nbColonnes = 10,
@@ -43,40 +19,6 @@ void initMat (CMatrice & mat, const size_t & nbLignes = 10,
             mat[i][j] = rand() % KPlusGrandNombreDansLaMatrice +1 ;
         }
     }
-}
-
-void  afficheMatriceV0 (const CMatrice & mat) {
-    cout << "\033[" << 30 <<"m";
-    for (size_t i=0 ; i < mat[0].size() ; ++i){
-        for (size_t j=0 ; j< mat[0].size(); ++j){
-            cout << "\033[" << mat[i][j]%10+40 <<"m";
-            cout << mat[i][j] << " " ;
-        }cout << endl ;
-    }
-    cout << "\033[" << 0 <<"m";
-}
-
-void  afficheMatriceV2 (const CMatrice & mat) {
-    cout << "    ";
-    for (size_t m=0 ; m< mat[0].size(); ++m){
-        cout << m+1 << " ";
-    }
-    cout << endl;
-    for (size_t i=0 ; i < mat[0].size() ; ++i){
-        cout << "\033[" << 0 <<"m";
-        if (i+1 == 10){
-            cout << i+1 << ": ";
-        }
-        else {
-            cout << i+1 << " : ";
-        }
-        for (size_t j=0 ; j< mat[0].size(); ++j){
-            cout << "\033[" << 30 <<"m";
-            cout << "\033[" << mat[i][j]%10+40 <<"m";
-            cout << mat[i][j] << " " ;
-        }cout << endl ;
-    }
-    cout << "\033[" << 0 <<"m";
 }
 
 void explositionUneBombeHorizontale (CMatrice & mat, const size_t & numLigne,
@@ -91,13 +33,14 @@ void explositionUneBombeHorizontale (CMatrice & mat, const size_t & numLigne,
     }
 }
 
-void explositionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,
-                                   const size_t & numColonne, const size_t & aLaSuite){
-
-    cout << numLigne << "   " << numColonne << "    " << aLaSuite ;
-    for (size_t i = numLigne+1 ; i > 0  ; --i){
-        mat[i+aLaSuite][numColonne] = mat[i][numColonne];
-        mat[i][numColonne] = 0 ;
+void explositionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,const size_t & numColonne, const size_t & aLaSuite){
+    for (size_t j=0 ; j < aLaSuite ; ++j){
+        for (size_t i=1 ; i < numLigne ; ++i ){
+            mat[numLigne-i][numColonne]=mat[numLigne-i-1][numColonne];
+        }
+    }
+    for (size_t k =0 ; k < aLaSuite ; ++k){
+        mat[k][numColonne] = 1+rand() % KPlusGrandNombreDansLaMatrice;
     }
 }
 
@@ -137,7 +80,6 @@ bool detectionExplositionUneBombeHorizontale (CMatrice & mat){
 bool detectionExplositionUneBombeVerticale(CMatrice & mat){
     bool auMoinsUneExplosion (false);
     size_t caseAct ;
-    size_t temp;
     size_t aLaSuite = 0 ;
     vector<size_t>tab ;
     for (size_t colonne = 0 ; colonne < mat[0].size() ; ++colonne){
@@ -159,7 +101,7 @@ bool detectionExplositionUneBombeVerticale(CMatrice & mat){
                      << "; sur  " << aLaSuite << " cases" << endl;
                 cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
                 afficheMatriceV2(mat);
-                explositionUneBombeVerticale (mat, i%10 -(aLaSuite/2) -1, i/10, aLaSuite);
+                explositionUneBombeVerticale(mat, i%10 +(aLaSuite/2) -1, i/10, aLaSuite);
                 cout << string (20, '-') << endl << "matrice après suppresion" << endl;
                 afficheMatriceV2(mat);
             }
@@ -171,10 +113,14 @@ int main() {
     clearScreen();
     CMatrice mat ;
     initMat(mat,10,10,20);
+//    while(detectionExplositionUneBombeHorizontale(mat) /*|| detectionExplositionUneBombeVerticale(mat)*/){
+//        detectionExplositionUneBombeHorizontale(mat);
+//        //detectionExplositionUneBombeVerticale(mat);
+//    }
     detectionExplositionUneBombeVerticale(mat);
-//    while (detectionExplositionUneBombeHorizontale(mat) == true){
-//    detectionExplositionUneBombeHorizontale(mat);
-//}
+    //    while (detectionExplositionUneBombeHorizontale(mat) == true){
+    //    detectionExplositionUneBombeHorizontale(mat);
+    //}
 
     return 0;
 }
