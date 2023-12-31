@@ -44,18 +44,18 @@ void explositionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,const
 
     }
     // Cette boucle remplace simplement par des 0 les valeurs alignés
-    //        mat[i][numColonne] = 0;
-    //        mat[numLigne+aLaSuite-1][numColonne] = mat[nombreAFaireDescendre-1][numColonne];
-    //        mat[numLigne+aLaSuite-2][numColonne] = mat[nombreAFaireDescendre-2][numColonne];
-    //         mat[numLigne+aLaSuite-3][numColonne] = mat[0][numColonne];
-
-    //    }
-    //    mat[nombreAFaireDescendre-1][numColonne] = 0;
-    //    mat[nombreAFaireDescendre-2][numColonne] = 0;
-    //    mat[0][numColonne] = 0;
     for (size_t i = numLigne ; i < numLigne+aLaSuite; ++i){
+//        mat[i][numColonne] = 0;
+//        mat[numLigne+aLaSuite-1][numColonne] = mat[nombreAFaireDescendre-1][numColonne];
+//        mat[numLigne+aLaSuite-2][numColonne] = mat[nombreAFaireDescendre-2][numColonne];
+//         mat[numLigne+aLaSuite-3][numColonne] = mat[0][numColonne];
 
-        mat[nombreAFaireDescendre][numColonne] = 0;
+//    }
+//    mat[nombreAFaireDescendre-1][numColonne] = 0;
+//    mat[nombreAFaireDescendre-2][numColonne] = 0;
+//    mat[0][numColonne] = 0;
+
+mat[nombreAFaireDescendre][numColonne] = 0;
         for (size_t j = 1 ; j < nombreAFaireDescendre+1 ; ++j){
 
             mat[numLigne+aLaSuite-j][numColonne] = mat[nombreAFaireDescendre-j][numColonne];
@@ -63,7 +63,7 @@ void explositionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,const
         }
 
 
-    }
+}
     for (size_t x = 0; x < aLaSuite; ++x){
         mat[x][numColonne] = rand() % KPlusGrandNombreDansLaMatrice +1;
     }
@@ -135,55 +135,46 @@ bool detectionExplositionUneBombeVerticale(CMatrice & mat){
     return auMoinsUneExplosion;
 }
 
-void faitUnMouvement(CMatrice & mat, const size_t &numLigne, const size_t &numCol) {
-
-    afficheMatriceVSwitch(mat, numLigne, numCol);
-
-    char  deplacement;
-    cin >> deplacement ;
+void faitUnMouvement (CMatrice & mat, const char & deplacement, const size_t & numLigne,
+                     const size_t & numCol) {
 
 
     switch (tolower(deplacement)) {
+
     case 'z':
-        cout << "Déplacement vers le haut demandé." << endl;
+        swap (mat[numLigne][numCol], mat[numLigne-1][numCol]);
+        afficheMatriceV2(mat);
 
-                    swap(mat[numLigne][numCol], mat[numLigne - 1][numCol]);
+        break;
 
-        cout << "Échange effectué." << endl;
-
-    // ... (autres cas)
     default:
-        cout << "Choisissez z, q, s, d" << endl;
+        cout<<" Choisis z , q , s , d "<<endl;
 
+        break;
     }
+    //faire la permutation entre les 2 cases
 }
+void testSwitch(CMatrice & mat){
 
-void testSwitch(CMatrice &mat) {
-    cout << "Fonction testSwitch appelée." << endl;
-            afficheMatriceV2(mat);
+    afficheMatriceV2(mat);
     cout << "Veuillez faire un mouvement" << endl;
-    faitUnMouvement(mat, 4, 4);
+    faitUnMouvement(mat, ' ' , 5 , 5);
+    afficheMatriceV2(mat);
 
 }
-
 
 
 int main() {
     clearScreen();
     CMatrice mat ;
     initMat(mat,10,10,20);
-    while (true) {
-        if (detectionExplositionUneBombeHorizontale(mat) || detectionExplositionUneBombeVerticale(mat)){
-
-
-        // Appeler la fonction une seule fois et stocker le résultat
-        detectionExplositionUneBombeHorizontale(mat);
-        detectionExplositionUneBombeVerticale(mat);
+        while(detectionExplositionUneBombeHorizontale(mat) || detectionExplositionUneBombeVerticale(mat)){
+            detectionExplositionUneBombeHorizontale(mat);
+           detectionExplositionUneBombeVerticale(mat);
+             testSwitch(mat);
         }
-        testSwitch(mat);
-
-    }
-
-    }
 
 
+
+    return 0;
+}

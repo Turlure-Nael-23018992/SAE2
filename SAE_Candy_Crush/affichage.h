@@ -12,4 +12,6 @@ void  afficheMatriceV0 (const CMatrice & mat);
 
 void  afficheMatriceV2 (const CMatrice & mat);
 
+void  afficheMatriceVSwitch (const CMatrice & mat, const size_t & ligneAct , const size_t & colAct);
+
 #endif // AFFICHAGE_H
