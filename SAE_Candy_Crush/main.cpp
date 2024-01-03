@@ -28,6 +28,30 @@ void initMat (CMatrice & mat, const size_t & nbLignes = 10,
         }
     }
 }
+CMatrice superExplosionHorizontale(CMatrice mat , const size_t & ligne){
+    for (size_t i = 0; i < 10; ++i) {
+        for (size_t j = 0; j < 10; ++j) {
+
+            cout << mat[i][j];
+
+
+
+
+        }
+
+}
+     return mat;
+}
+
+CMatrice superExplosionVerticale(CMatrice mat, const size_t &colonne){
+    for (size_t i=0 ; i < mat.size() ; ++i) {
+         cout << mat[i][colonne] << endl;
+        mat[i][colonne] =0;
+    }
+
+    return mat;
+}
+
 void explosionUneBombeHorizontale (CMatrice & mat, const size_t & numLigne,const size_t & numColonne, const size_t & aLaSuite){
     for (size_t i=numLigne ; i>0 ; i=i-1){
         for (size_t j = 0 ; j < aLaSuite ; ++j){
@@ -38,6 +62,7 @@ void explosionUneBombeHorizontale (CMatrice & mat, const size_t & numLigne,const
         mat[0][numColonne+p]=rand() % KPlusGrandNombreDansLaMatrice +1;
     }
 }
+
 
 void explosionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,const size_t & numColonne, const size_t & aLaSuite) {
     size_t nombreAFaireDescendre = 0;
@@ -74,7 +99,6 @@ bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
     size_t temp = 0;
     size_t aLaSuite = 0;
     int caseAct = mat[0][0];
-
     for (size_t i = 0; i < mat.size(); ++i) {
         for (size_t j = 0; j < mat[i].size(); ++j) {
             if (caseAct != mat[i][j]) {
@@ -83,23 +107,40 @@ bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
                 caseAct = mat[i][j];
             } else {
                 ++aLaSuite;
-                    // Mettez à jour temp pour conserver la position du début de la suite
                 if (aLaSuite >= 3 && (j == mat[i].size() - 1 || mat[i][j + 1] != caseAct)) {
                     auMoinsUneExplosion = true;
-                    cout << "On a une suite en position numLigne = " << i + 1
-                         << "; colonne = " << temp + 1
-                         << "; sur  " << aLaSuite << " cases" << endl;
-                    nombrePoints += aLaSuite ;
-                    // Effectuer la suppression (appel à la fonction explositionUneBombeHorizontale)
-                    cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
-                    afficheMatriceV2(mat);
+                    if (aLaSuite == 3){
+                        cout << "On a une suite en position numLigne = " << i + 1
+                             << "; colonne = " << temp + 1
+                             << "; sur  " << aLaSuite << " cases" << endl;
+                        nombrePoints += aLaSuite ;
+                        cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
+                        afficheMatriceV2(mat);
 
-                    cout << "POINTS :  " << nombrePoints  << endl;
-                    sleep(1);
+                        cout << "POINTS :  " << nombrePoints  << endl;
+                      sleep(1);
 
-                    explosionUneBombeHorizontale(mat, i, temp, aLaSuite);
-                    cout << string(20, '-') << endl << "Matrice après suppression" << endl;
-                                afficheMatriceV2(mat);
+                        explosionUneBombeHorizontale(mat, i, temp, aLaSuite);
+                        cout << string(20, '-') << endl << "Matrice après suppression" << endl;
+                                    afficheMatriceV2(mat);}
+
+                    else if (aLaSuite ==4){
+                        cout << "On a une SUPER suite en position numLigne = " << i + 1
+                             << "; colonne = " << temp + 1
+                             << "; sur  " << aLaSuite << " cases" << endl;
+                        nombrePoints += aLaSuite ;
+                        cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
+                        afficheMatriceV2(mat);
+
+                        cout << "POINTS :  " << nombrePoints  << endl;
+                        sleep(1);
+
+                        CMatrice nouvellematrice = superExplosionVerticale(mat, i);
+                        mat = nouvellematrice;
+                        cout << string(20, '-') << endl << "Matrice après suppression" << endl;
+                                    afficheMatriceV2(mat);
+
+                    }
                 }
             }
         }
@@ -109,14 +150,14 @@ bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
 
 bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
     bool auMoinsUneExplosion = false;
-    size_t caseAct = mat[0][0];
+    size_t caseAct ;
     size_t aLaSuite = 0;
     vector<size_t> tab;
     for (size_t colonne = 0; colonne < mat[0].size(); ++colonne) {
         aLaSuite = 0;
         for (size_t ligne = 0; ligne < mat.size(); ++ligne) {
-            tab.push_back(mat[ligne][colonne]);
-        }
+            tab.push_back(mat[ligne][colonne]);}
+        caseAct=tab[0];
         for (size_t i = 0; i < tab.size(); ++i) {
             if (caseAct != tab[i]) {
                 caseAct = tab[i];
@@ -125,21 +166,39 @@ bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
                 ++aLaSuite;
                 if (aLaSuite >= 3 && (i == tab.size() - 1 || tab[i + 1] != caseAct)) {
                     auMoinsUneExplosion = true;
-                    cout << "On a une suite en position numLigne = " << i % mat.size() - aLaSuite/2
-                         << "; colonne = " << colonne + 1
-                         << "; sur  " << aLaSuite << " cases" << endl;
-                    nombrePoints += aLaSuite;
+                    if (aLaSuite == 3){
+                                    cout << "On a une suite en position numLigne = " << i % mat.size() - aLaSuite/2
+                                         << "; colonne = " << colonne + 1
+                                         << "; sur  " << aLaSuite << " cases" << endl;
+                                    nombrePoints += aLaSuite;
+                                    // Effectuer la suppression (appel à la fonction explositionUneBombeVerticale)
+                                    cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
+                                    afficheMatriceV2(mat);
+                                    cout << "POINTS :" << nombrePoints << endl;
+                                    sleep(1);
 
-                    // Effectuer la suppression (appel à la fonction explositionUneBombeVerticale)
-                    cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
-                    afficheMatriceV2(mat);
-                    cout << "POINTS" << nombrePoints << endl;
-                    sleep(1);
+                                    explosionUneBombeVerticale(mat, i % mat.size() - aLaSuite / 2 - 1, colonne, aLaSuite);
+                                    cout << string(20, '-') << endl << "Matrice après suppression" << endl;
+                                                afficheMatriceV2(mat);
+                    }
 
-                    explosionUneBombeVerticale(mat, i % mat.size() - aLaSuite / 2 - 1, colonne, aLaSuite);
-                    cout << string(20, '-') << endl << "Matrice après suppression" << endl;
-                                afficheMatriceV2(mat);
+                    else if (aLaSuite == 4){
+                                    cout << "On a une SUPER suite en position numLigne = " << i % mat.size() - aLaSuite/2
+                                         << "; colonne = " << colonne + 1
+                                         << "; sur  " << aLaSuite << " cases" << endl;
+                                    nombrePoints += aLaSuite;
+                                    // Effectuer la suppression (appel à la fonction explositionUneBombeVerticale)
+                                    cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
+                                    afficheMatriceV2(mat);
+                                    cout << "POINTS : " << nombrePoints << endl;
+                                    sleep(1);
+                                    CMatrice nouvellematrice=superExplosionVerticale(mat, colonne);
+                                    mat = nouvellematrice;
+                                    cout << string(20, '-') << endl << "Matrice après suppression" << endl;
+                                                afficheMatriceV2(mat);
 
+
+                    }
                 }
             }
         }
@@ -149,9 +208,9 @@ bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
     return auMoinsUneExplosion;
 }
 CMatrice destructionCascade(CMatrice &mat){
-    while (detectionExplosionUneBombeHorizontale(mat) || detectionExplosionUneBombeVerticale(mat)){
+    while (detectionExplosionUneBombeHorizontale(mat) /*||detectionExplosionUneBombeVerticale(mat)*/){
         detectionExplosionUneBombeHorizontale(mat);
-        detectionExplosionUneBombeVerticale(mat);
+        //detectionExplosionUneBombeVerticale(mat);
     }
 
     return mat;
