@@ -17,6 +17,14 @@
 using namespace std;
 
 
+/**
+ * @brief initMat Cette fonction sert à initier la matrice en lui donnant un taille c'est à dire une longueur et une largeur ainsi que la valeur max
+ * qu'elle peut atteindre dans ses cases.
+ * @param mat : la matrice
+ * @param nbLignes : le nombre de lignes de la matrice
+ * @param nbColonnes : le nombre de colonnes de la matrice
+ * @param nbMax : la valeur max que peut atteindre
+ */
 void initMat (CMatrice & mat, const size_t & nbLignes = 10,
              const size_t & nbColonnes = 10,
              const unsigned & nbMax= KPlusGrandNombreDansLaMatrice){
@@ -28,6 +36,14 @@ void initMat (CMatrice & mat, const size_t & nbLignes = 10,
         }
     }
 }
+
+
+/**
+ * @brief superExplosionHorizontale : Cette fonction nous permet de casser une ligne entière lorsqu'une super suite est détectée, elle casse toute
+ * la ligne et ensuite fait descendre tous les caractère du dessus et regénère des caractères sur la ligne du dessus.
+ * @param mat : la matrice
+ * @param ligne : la ligne du motif
+ */
 CMatrice superExplosionHorizontale(CMatrice mat , const size_t & ligne){
     for (size_t i = 0; i < 10; ++i) {
         for (size_t j = 0; j < 10; ++j) {
@@ -43,6 +59,14 @@ CMatrice superExplosionHorizontale(CMatrice mat , const size_t & ligne){
      return mat;
 }
 
+
+/**
+ * @brief superExplosionVerticale : Cette fonction nous permet de casser une colonne entière lorsqu'une super suite est detectée, elle génère
+ * à chaque case de la colonne une valeur aléatoire car cela revient au même que de casser la colonne entière et ensuite générer de nouveau
+ * des caractères.
+ * @param mat : la matrice
+ * @param colonne : la colonne ou se trouve la super suite
+ */
 CMatrice superExplosionVerticale(CMatrice mat, const size_t &colonne){
     for (size_t i=0 ; i < mat.size() ; ++i) {
          cout << mat[i][colonne] << endl;
@@ -52,6 +76,14 @@ CMatrice superExplosionVerticale(CMatrice mat, const size_t &colonne){
     return mat;
 }
 
+/**
+ * @brief explosionUneBombeHorizontale : la fonction nous permet de détruire les motifs de 3 lettres à l'horizontale, faire descendre les caractères
+ * du dessus , et regénérer des caractères en haut de la matrice.
+ * @param mat : la matrice
+ * @param numLigne : la ligne à laquelle le motif se trouve
+ * @param numColonne : la ligne à laquelle le motif commence
+ * @param aLaSuite : la taille du motif
+ */
 void explosionUneBombeHorizontale (CMatrice & mat, const size_t & numLigne,const size_t & numColonne, const size_t & aLaSuite){
     for (size_t i=numLigne ; i>0 ; i=i-1){
         for (size_t j = 0 ; j < aLaSuite ; ++j){
@@ -63,7 +95,14 @@ void explosionUneBombeHorizontale (CMatrice & mat, const size_t & numLigne,const
     }
 }
 
-
+/**
+ * @brief explosionUneBombeVerticale : cette fonction nous permet de détruire les motifs de 3 lettres à la verticale , faire descendre les caractères
+ * du dessus , et regénérer des caractères en haut de la matrice.
+ * @param mat : la matrice
+ * @param numLigne : la ligne à laquelle le motif commence
+ * @param numColonne : la colonne à laquelle le motif se trouve
+ * @param aLaSuite : la taille du motif
+ */
 void explosionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,const size_t & numColonne, const size_t & aLaSuite) {
     size_t nombreAFaireDescendre = 0;
     for(; nombreAFaireDescendre < numLigne; ++nombreAFaireDescendre){
@@ -94,6 +133,13 @@ void explosionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,const s
 
 size_t nombrePoints = 0;
 
+
+/**
+ * @brief detectionExplosionUneBombeVerticale :fonction booleen qui détecte s'il y a une suite d'au moins 3 caractères égaux à la verticale
+ * et apelle en conséquence la fonction pour casser le motif
+ * @param mat : la matrice
+ * @return : la fonction renvoie true si un motif est présent à la verticale dans la matrice
+ */
 bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
     bool auMoinsUneExplosion = false;
     size_t temp = 0;
@@ -148,6 +194,12 @@ bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
     return auMoinsUneExplosion;
 }
 
+/**
+ * @brief detectionExplosionUneBombeVerticale :fonction booleen qui détecte s'il y a une suite d'au moins 3 caractères égaux à la verticale
+ * et apelle en conséquence la fonction pour casser le motif
+ * @param mat : la matrice
+ * @return : la fonction renvoie true si un motif est présent à la verticale dans la matrice
+ */
 bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
     bool auMoinsUneExplosion = false;
     size_t caseAct ;
@@ -207,6 +259,13 @@ bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
     }
     return auMoinsUneExplosion;
 }
+
+/**
+ * @brief destructionCascade : la fonction vérifie si il y a un motif présent dans la matrice, et temps qu'un motif est présent elle apelle les
+ * détections qui ensuite apelleront les fonctions qui détruiront les motifs.
+ * @param mat : la matrice
+ * @return : la fonction renvoie la matrice apres modifications.
+ */
 CMatrice destructionCascade(CMatrice &mat){
     while (detectionExplosionUneBombeHorizontale(mat) /*||detectionExplosionUneBombeVerticale(mat)*/){
         detectionExplosionUneBombeHorizontale(mat);
@@ -216,6 +275,15 @@ CMatrice destructionCascade(CMatrice &mat){
     return mat;
 }
 
+/**
+ * @brief estCoupJouable : la fonction vérifie si un coup est jouable c'est à dire si lors d'un changement de place de 2 caractères où les cases
+ * sont collées un motif apparait, ça voudrait dire que le coup est jouable.
+ * @param mat : la matrice
+ * @param pair1 : la pair contenant la ligne et la colonne de la case initiale
+ * @param ajoutLigne : la valeur de la ligne à ajouter pour arriver à la case avec laquelle la case initiale doit échanger sa valeur
+ * @param ajoutColonne : la valeur de la colonne à ajouter pour arriver à la case avec laquelle la case initiale doit échanger sa valeur
+ * @return
+ */
 bool estCoupJouable(CMatrice mat,CInt pair1, size_t ajoutLigne,size_t ajoutColonne )
 
 {
@@ -233,6 +301,14 @@ bool estCoupJouable(CMatrice mat,CInt pair1, size_t ajoutLigne,size_t ajoutColon
 size_t ligneAct = 4;
 size_t colonneAct = 4;
 
+
+/**
+ * @brief faitUnMouvement : la fonction utilise un switch case pour pouvoir se déplacer dans la matrice (grille de jeu) et lorsqu'on appuie sur la touche
+ * pour rentrer en mode inversion, elle sauvegarde la case initiale et demande un déplacement pour savoir avec quelle case elle échagera sa valeur
+ * si le coup est jouabel , c'est-à-dire qu'il mène à la création d'un motif.
+ * @param mat : la matrice
+ * @return : la fonction renvoie true si un mouvement a été fait
+ */
 bool faitUnMouvement(CMatrice & mat) {
 
     bool premierMouvement = false;
@@ -329,20 +405,13 @@ bool faitUnMouvement(CMatrice & mat) {
 
             break;
         }
-
-
-
         default:
             break;
         }
-
-
-
     }
     default:
         cout << "Choisissez z, q, s, d" << endl;
         break;
-
     }
 
     if (ligneAct < 0 || ligneAct > 9 || colonneAct < 0 || colonneAct > 9) {
