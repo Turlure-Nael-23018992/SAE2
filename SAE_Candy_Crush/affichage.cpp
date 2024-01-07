@@ -25,13 +25,13 @@ void  afficheMatriceV0 (const CMatrice & mat) {
 
 void  afficheMatriceV2 (const CMatrice & mat) {
     cout << "    ";
-    for (size_t m=0 ; m< mat[0].size(); ++m){
+    for (size_t m=0 ; m< mat.size(); ++m){
         cout << m+1 << " ";
     }
     cout << endl;
     for (size_t i=0 ; i < mat[0].size() ; ++i){
         cout << "\033[" << 0 <<"m";
-        if (i+1 == 10){
+        if (i+1 >= 10){
             cout << i+1 << ": ";
         }
         else {
@@ -54,7 +54,7 @@ void  afficheMatriceVSwitch (const CMatrice & mat, const size_t & ligneAct , con
     cout << endl;
     for (size_t i=0 ; i < mat[0].size() ; ++i){
         cout << "\033[" << 0 <<"m";
-        if (i+1 == 10){
+        if (i+1 >= 10){
             cout << i+1 << ": ";
         }
         else {

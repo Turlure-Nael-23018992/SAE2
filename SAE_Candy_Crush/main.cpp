@@ -80,7 +80,7 @@ void explosionUneBombeVerticale (CMatrice & mat, const size_t & numLigne,const s
 }
 bool partieCommence = false;
 size_t score = 0;
-bool finPartie= true;
+size_t nombreEssaisRestants = 5;
 
 
 bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
@@ -104,7 +104,7 @@ bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
                          << "; sur  " << aLaSuite << " cases" << endl << endl;
                     if (partieCommence == true){
                         score += aLaSuite ;
-                        cout << "POINTS :  " << score  << endl;
+
                         sleep(1);
                     }
                     else {
@@ -113,7 +113,9 @@ bool detectionExplosionUneBombeHorizontale(CMatrice &mat) {
 
                     cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
                     afficheMatriceV2(mat);
-                    sleep(1);
+                    if(partieCommence == true){
+                        sleep(1);
+                    }
 
 
 
@@ -152,7 +154,7 @@ bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
                              << "; sur  " << aLaSuite << " cases" << endl << endl;
                         if (partieCommence == true){
                             score+=aLaSuite;
-                            cout << "POINTS :" << score << endl;
+
                             sleep(1);
                         }
                         else {
@@ -163,15 +165,16 @@ bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
                         // Effectuer la suppression (appel à la fonction explositionUneBombeVerticale)
                         cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
                         afficheMatriceV2(mat);
-                        sleep(1);
-
+                        if (partieCommence == true){
+                            sleep(1);
+                        }
 
                         explosionUneBombeVerticale(mat, i % mat.size() - aLaSuite / 2 - 1, colonne, aLaSuite);
                         cout << string(20, '-') << endl << "Matrice après suppression" << endl;
                                     afficheMatriceV2(mat);
                     }
 
-                    else if (aLaSuite == 4){
+                    else if (aLaSuite >= 4){
                         if (partieCommence == true){
                             score += mat.size();
                             cout << "POINTS : " << score << endl;
@@ -186,8 +189,9 @@ bool detectionExplosionUneBombeVerticale(CMatrice &mat) {
                         // Effectuer la suppression (appel à la fonction explositionUneBombeVerticale)
                         cout << string (20, '-') << endl << "matrice avant suppresion" << endl;
                         afficheMatriceV2(mat);
-
-                        sleep(1);
+                        if (partieCommence== true){
+                            sleep(1);
+                        }
                         CMatrice nouvellematrice=superExplosionVerticale(mat, colonne);
                         mat = nouvellematrice;
                         cout << string(20, '-') << endl << "Matrice après suppression" << endl;
@@ -293,6 +297,10 @@ bool faitUnMouvement(CMatrice & mat) {
     char deplacement;
     char inversion;
 
+    cout << "POINTS :  " << score  << endl;
+    cout << "Nombres d'essais restant : " << nombreEssaisRestants << endl;
+    cout << "Veuillez faire un mouvement" << endl;
+
     cin >> deplacement ;
 
     bool deplacementValide = true;
@@ -332,6 +340,7 @@ bool faitUnMouvement(CMatrice & mat) {
         case 'z':{
             if (estCoupJouable(mat,position,-1,0)){
                 swap (mat[ligneAct][colonneAct], mat[ligneAct-1][colonneAct]);
+                --nombreEssaisRestants;
             }
             else{
 
@@ -345,6 +354,7 @@ bool faitUnMouvement(CMatrice & mat) {
 
             if (estCoupJouable(mat,position,0,-1)){
                 swap (mat[ligneAct][colonneAct], mat[ligneAct][colonneAct-1]);
+                --nombreEssaisRestants;
             }
             else{
 
@@ -357,6 +367,7 @@ bool faitUnMouvement(CMatrice & mat) {
 
             if (estCoupJouable(mat,position,1,0)){
                 swap (mat[ligneAct][colonneAct], mat[ligneAct+1][colonneAct]);
+                --nombreEssaisRestants;
 
             }
             else{
@@ -369,6 +380,7 @@ bool faitUnMouvement(CMatrice & mat) {
         case 'd':{
             if (estCoupJouable(mat,position,0,1)){
                 swap (mat[ligneAct][colonneAct], mat[ligneAct][colonneAct+1]);
+                --nombreEssaisRestants;
             }
             else{
 
@@ -418,8 +430,7 @@ void testSwitch(CMatrice &mat)
 
     cout << "Entrez, z (haut) , q (gauche), s (bas) , d (droite) Pour vous déplacer " << endl << endl << "Pour passer en mode inversion de case entrer I" << endl << endl;
 
-                    cout << "Veuillez faire un mouvement" << endl;
-    faitUnMouvement(mat);
+                    faitUnMouvement(mat);
 
 }
 
@@ -438,13 +449,15 @@ CMatrice choixNiveau(){
     }
     if (niveau == 1){
         initMat(mat,5,5,20);
+        nombreEssaisRestants = 15;
     }
     else if (niveau == 2){
         initMat(mat, 10,10,20);
     }
     else{
 
-        initMat(mat,15,15,20);
+        initMat(mat,10,10,20);
+        nombreEssaisRestants = 3;
     }
 
     return mat;
@@ -452,15 +465,31 @@ CMatrice choixNiveau(){
 
 
 void partieModeNiveau(CMatrice & mat) {
-    while (true) {
+    bool partieGagné = false;
+        while (true) {
 
 
         destructionCascade(mat);
         partieCommence = true;
+
+        if (score >= 50){
+            partieGagné = true;
+                break;
+        }
+        if (nombreEssaisRestants == 0){
+            break;
+        }
         testSwitch(mat);
 
 
     }
+    system("clear");
+    if(partieGagné == true){
+        cout << "Niveau Terminé BRAVO " << endl;
+}
+else {
+    cout <<" GAME OVER " << endl;
+}
 }
 void modeNiveau(){
 
@@ -474,15 +503,12 @@ void modeArcade(){
 
     CMatrice  mat;
     initMat(mat,10,10,20);
-    // Définir la durée du minuteur à 1 minute
-    chrono::seconds dureeMinuteur(300);
 
-    // Obtenez le point de départ actuel du minuteur
+    chrono::seconds dureeMinuteur(120);
+
     auto debutMinuteur = chrono::high_resolution_clock::now();
 
-    // Boucle jusqu'à ce que la durée du minuteur s'écoule
 
-    // Calculer le temps restant en minutes et secondes
 
     while (true) {
         auto maintenant = chrono::high_resolution_clock::now();
@@ -500,15 +526,62 @@ void modeArcade(){
 
         if (dureePasse >= dureeMinuteur) {
             cout << "Minuteur de 1 minute écoulé." << endl;
-                break;
+                    cout << "Score final : " << score << endl;
+            break;
         }
 
 
-        // Attendez une seconde avant de vérifier à nouveau
         this_thread::sleep_for(chrono::seconds(1));
 
 
     }
+}
+
+void modeCreatif (){
+
+    size_t choixTaille;
+    CMatrice matriceJoueur;
+    size_t objectifPoints;
+
+    cout << "Vous allez ici pouvoir créer votre propre plateau de jeu et y jouer ! " << endl;
+
+                cout << "Commencez par choisir le nombre d'essais que vous voulez" << endl;
+    cin >> nombreEssaisRestants;
+    cout << "Désormais choisissez la taille de la matrice (le maximum est 10)" << endl;
+                cin >> choixTaille;
+    initMat(matriceJoueur,choixTaille,choixTaille,5);
+    cout << "Combien de points faut il atteindre pour gagner ?" << endl;
+    cin >> objectifPoints;
+
+
+    cout << "La partie peut désormais débuter ! " << endl;
+
+        bool partieGagné = false;
+        while (true) {
+
+
+        destructionCascade(matriceJoueur);
+        partieCommence = true;
+
+        if (score >= objectifPoints){
+            partieGagné = true;
+                break;
+        }
+        if (nombreEssaisRestants == 0){
+            break;
+        }
+        testSwitch(matriceJoueur);
+
+
+    }
+    system("clear");
+    if(partieGagné == true){
+        cout << "Niveau Terminé BRAVO " << endl;
+}
+else {
+    cout <<" GAME OVER " << endl;
+
+}
 }
 
 void menuPrincipal(){
@@ -533,6 +606,7 @@ void menuPrincipal(){
     while (choix  !=1 && choix!= 2 && choix!= 3){
 
         cout << "1,2 ou 3 pour choisir le mode" << endl;
+
         cin >> choix;
 
     }
@@ -545,7 +619,7 @@ void menuPrincipal(){
         modeNiveau();
     }
     else {
-
+        modeCreatif();
     }
 
 
