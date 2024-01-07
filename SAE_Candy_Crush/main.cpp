@@ -27,7 +27,7 @@ char inv ('i');
  */
 void actualiserTouche() {
     //Touches par défaut
-    const string fichier = "D:/code/SAE2/SAE2/SAE_Candy_Crush/config.yaml";
+    const string fichier = "../SAE_Candy_Crush/config.yaml";
     ifstream ifs(fichier);
 
     if (ifs.is_open()) {
