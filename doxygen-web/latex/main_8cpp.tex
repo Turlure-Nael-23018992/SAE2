@@ -1,0 +1,462 @@
+\doxysection{Référence du fichier main.\+cpp}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$type.\+h$>$}\newline
+{\ttfamily \#include $<$cst.\+h$>$}\newline
+{\ttfamily \#include $<$affichage.\+h$>$}\newline
+\doxysubsubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{main_8cpp_a9c92e9a045a6c1840d4fbae99a0963f2}{haut}} (\textquotesingle{}z\textquotesingle{})
+\item 
+char \mbox{\hyperlink{main_8cpp_aeb83de5a9207cba8f5fd2145a45af010}{bas}} (\textquotesingle{}s\textquotesingle{})
+\item 
+char \mbox{\hyperlink{main_8cpp_a2315391732383f8c6652037f0be8282f}{gauche}} (\textquotesingle{}q\textquotesingle{})
+\item 
+char \mbox{\hyperlink{main_8cpp_a4322a24ff1cae51605b90001ccdfeb9e}{droite}} (\textquotesingle{}d\textquotesingle{})
+\item 
+char \mbox{\hyperlink{main_8cpp_a491bd3f0516027bbe9912a8cc64047d9}{inv}} (\textquotesingle{}i\textquotesingle{})
+\item 
+void \mbox{\hyperlink{main_8cpp_a96579da1493ca641bb4d61bf0ee71600}{actualiser\+Touche}} ()
+\begin{DoxyCompactList}\small\item\em actualiser\+Touche \+: la fonction actualise les touches du joueur en fonction du fichier config.\+yaml si le joueur a changé les touhes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ab058cd47399b78d187003bc2a76980a3}{init\+Mat}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat, const size\+\_\+t \&nb\+Lignes=10, const size\+\_\+t \&nb\+Colonnes=10, const unsigned \&nb\+Max=\mbox{\hyperlink{cst_8h_a7d0c8ee42c07e97113818539b3aa8f49}{KPlus\+Grand\+Nombre\+Dans\+La\+Matrice}})
+\begin{DoxyCompactList}\small\item\em init\+Mat Cette fonction sert à initier la matrice en lui donnant un taille c\textquotesingle{}est à dire une longueur et une largeur ainsi que la valeur max qu\textquotesingle{}elle peut atteindre dans ses cases. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \mbox{\hyperlink{main_8cpp_ac2f44dfb97d1fa879f79a524d5852499}{super\+Explosion\+Verticale}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} mat, const size\+\_\+t \&colonne)
+\begin{DoxyCompactList}\small\item\em super\+Explosion\+Horizontale \+: Cette fonction nous permet de casser une ligne entière lorsqu\textquotesingle{}une super suite est détectée, elle casse toute la ligne et ensuite fait descendre tous les caractère du dessus et regénère des caractères sur la ligne du dessus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a583aa590148d603ad15fe8ca0f1fa6ba}{explosion\+Une\+Bombe\+Horizontale}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat, const size\+\_\+t \&num\+Ligne, const size\+\_\+t \&num\+Colonne, const size\+\_\+t \&a\+La\+Suite)
+\begin{DoxyCompactList}\small\item\em explosion\+Une\+Bombe\+Horizontale \+: la fonction nous permet de détruire les motifs de 3 lettres à l\textquotesingle{}horizontale, faire descendre les caractères du dessus , et regénérer des caractères en haut de la matrice. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a03f386e6f06c7819167bd1430a477e13}{explosion\+Une\+Bombe\+Verticale}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat, const size\+\_\+t \&num\+Ligne, const size\+\_\+t \&num\+Colonne, const size\+\_\+t \&a\+La\+Suite)
+\begin{DoxyCompactList}\small\item\em explosion\+Une\+Bombe\+Verticale \+: cette fonction nous permet de détruire les motifs de 3 lettres à la verticale , faire descendre les caractères du dessus , et regénérer des caractères en haut de la matrice. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_acf889a0827b874715f9ab027351d3299}{detection\+Explosion\+Une\+Bombe\+Horizontale}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat)
+\begin{DoxyCompactList}\small\item\em detection\+Explosion\+Une\+Bombe\+Verticale \+:fonction booleen qui détecte s\textquotesingle{}il y a une suite d\textquotesingle{}au moins 3 caractères égaux à l\textquotesingle{}horizontale et apelle en conséquence la fonction pour casser le motif \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_adb646070b0e4491a586c6629f3612422}{detection\+Explosion\+Une\+Bombe\+Verticale}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat)
+\begin{DoxyCompactList}\small\item\em detection\+Explosion\+Une\+Bombe\+Verticale \+:fonction booleen qui détecte s\textquotesingle{}il y a une suite d\textquotesingle{}au moins 3 caractères égaux à la verticale et apelle en conséquence la fonction pour casser le motif \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_ac3d3983f92d5935c2fabd420a05662ac}{detection\+Explosion\+Une\+Bombe\+Horizontale\+VERIFICATION}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat)
+\begin{DoxyCompactList}\small\item\em detection\+Explosion\+Une\+Bombe\+Horizontale\+VERIFICATION \+: La fonction fait comme l\textquotesingle{}autre détection horizontale elle vérifie si une suite est présente mais sans afficher les matrices. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a9d1672e922b18ac07a00d56fed11cde0}{detection\+Explosion\+Une\+Bombe\+Verticale\+VERIFICATION}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat)
+\begin{DoxyCompactList}\small\item\em detection\+Explosion\+Une\+Bombe\+Verticale\+VERIFICATION \end{DoxyCompactList}\item 
+\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \mbox{\hyperlink{main_8cpp_a41237f84ef3a1b965f10ca0a398e3943}{destruction\+Cascade}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat)
+\begin{DoxyCompactList}\small\item\em destruction\+Cascade \+: la fonction vérifie si il y a un motif présent dans la matrice, et temps qu\textquotesingle{}un motif est présent elle apelle les détections qui ensuite apelleront les fonctions qui détruiront les motifs. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a9e2b917e1830d49904d9131efee935f9}{est\+Coup\+Jouable}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} mat, \mbox{\hyperlink{type_8h_a9d6b4af46db0134117904d49af4996d4}{CInt}} pair1, size\+\_\+t ajout\+Ligne, size\+\_\+t ajout\+Colonne)
+\begin{DoxyCompactList}\small\item\em est\+Coup\+Jouable \+: la fonction vérifie si un coup est jouable c\textquotesingle{}est à dire si lors d\textquotesingle{}un changement de place de 2 caractères où les cases sont collées un motif apparait, ça voudrait dire que le coup est jouable. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_a51b4e2b6d810e99c596340187dc02644}{fait\+Un\+Mouvement}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat, char \mbox{\hyperlink{main_8cpp_a9c92e9a045a6c1840d4fbae99a0963f2}{haut}}, char \mbox{\hyperlink{main_8cpp_a2315391732383f8c6652037f0be8282f}{gauche}}, char \mbox{\hyperlink{main_8cpp_aeb83de5a9207cba8f5fd2145a45af010}{bas}}, char \mbox{\hyperlink{main_8cpp_a4322a24ff1cae51605b90001ccdfeb9e}{droite}}, char \mbox{\hyperlink{main_8cpp_a491bd3f0516027bbe9912a8cc64047d9}{inv}})
+\begin{DoxyCompactList}\small\item\em fait\+Un\+Mouvement \+: la fonction utilise des conditions pour pouvoir se déplacer dans la matrice (grille de jeu) et lorsqu\textquotesingle{}on appuie sur la touche pour rentrer en mode inversion, elle sauvegarde la case initiale et demande un déplacement pour savoir avec quelle case elle échagera sa valeur si le coup est jouabel , c\textquotesingle{}est-\/à-\/dire qu\textquotesingle{}il mène à la création d\textquotesingle{}un motif. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_af05630e0f6fa515386eb4b2e0aaf3622}{test\+Switch}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat)
+\begin{DoxyCompactList}\small\item\em test\+Switch \+: la fonction nous dit de faire un mouvement et apelle fait\+Un\+Mouvement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \mbox{\hyperlink{main_8cpp_a4d06727df17a8981914f468f41406506}{choix\+Niveau}} ()
+\begin{DoxyCompactList}\small\item\em choix\+Niveau \+: la fonction nous demande de choisir le niveau de difficulté auquel on veut jouer (1 pour facile, 2 pour moyen et 3 pour difficile). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a22f6f19e755977195b51766e13f8eec7}{partie\+Mode\+Niveau}} (\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&mat)
+\begin{DoxyCompactList}\small\item\em partie\+Mode\+Niveau \+: Cette fonction simule une partie dans ce mode de jeu ou le joueur doit faire + de 50 points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ab71099eed2c34b3ea2dbde2c70ea3e6c}{mode\+Niveau}} ()
+\begin{DoxyCompactList}\small\item\em mode\+Niveau \+: la fonction apelle la fonction qui permet de choisir le niveau de difficulté et initie la matrice en conséquence puis apelle la fonction qui simule la partie. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_abf979a2cb4d3afaf02b3bd86db973e87}{mode\+Arcade}} ()
+\begin{DoxyCompactList}\small\item\em mode\+Arcade \+: la fonction lance le mode de jeu arcade, une partie avec un timer de 2 minutes (120 secondes) ou le joueur doit faire le plus de points en 2 mins. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ae6cae7ab7bff82b1db65edaa7d10a1ea}{mode\+Creatif}} ()
+\begin{DoxyCompactList}\small\item\em mode\+Creatif \+: la fonction sert à jouer au mode créatif, le mode ou on choisit les règles de son propre jeu avec un temps, un nombre d\textquotesingle{}essai, la taille de la grille de jeu et le nombre de points minimum pour gagner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_adfbaa271f44d828c6a42ce7e9affee88}{menu\+Principal}} ()
+\begin{DoxyCompactList}\small\item\em menu\+Principal \+: Le menu principal affiché lors du début de la partie dans lequel on choisit le mode de jeu auquel on souhaite jouer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{main_8cpp_af50a26031d2746d8afdef8e837cf7a6d}{partie\+Commence}} = false
+\item 
+size\+\_\+t \mbox{\hyperlink{main_8cpp_afb58707a2be7d1f8a88390c3f23df877}{score}} = 0
+\item 
+size\+\_\+t \mbox{\hyperlink{main_8cpp_ac8a6a912ac3c8ae0e42ec2b876b950d0}{nombre\+Essais\+Restants}} = 5
+\item 
+size\+\_\+t \mbox{\hyperlink{main_8cpp_af6e55345628a5173ee4bd649c47f72d5}{ligne\+Act}} = 2
+\item 
+size\+\_\+t \mbox{\hyperlink{main_8cpp_a4c60b2b36f563b5b7306cc5e8227f7d6}{colonne\+Act}} =2
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentation des fonctions}
+\Hypertarget{main_8cpp_a96579da1493ca641bb4d61bf0ee71600}\label{main_8cpp_a96579da1493ca641bb4d61bf0ee71600} 
+\index{main.cpp@{main.cpp}!actualiserTouche@{actualiserTouche}}
+\index{actualiserTouche@{actualiserTouche}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{actualiserTouche()}{actualiserTouche()}}
+{\footnotesize\ttfamily void actualiser\+Touche (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+actualiser\+Touche \+: la fonction actualise les touches du joueur en fonction du fichier config.\+yaml si le joueur a changé les touhes. 
+
+\Hypertarget{main_8cpp_aeb83de5a9207cba8f5fd2145a45af010}\label{main_8cpp_aeb83de5a9207cba8f5fd2145a45af010} 
+\index{main.cpp@{main.cpp}!bas@{bas}}
+\index{bas@{bas}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{bas()}{bas()}}
+{\footnotesize\ttfamily char bas (\begin{DoxyParamCaption}\item[{\textquotesingle{}s\textquotesingle{}}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a4d06727df17a8981914f468f41406506}\label{main_8cpp_a4d06727df17a8981914f468f41406506} 
+\index{main.cpp@{main.cpp}!choixNiveau@{choixNiveau}}
+\index{choixNiveau@{choixNiveau}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{choixNiveau()}{choixNiveau()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} choix\+Niveau (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+choix\+Niveau \+: la fonction nous demande de choisir le niveau de difficulté auquel on veut jouer (1 pour facile, 2 pour moyen et 3 pour difficile). 
+
+\begin{DoxyReturn}{Renvoie}
+\+: renvoie la matrice . 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a41237f84ef3a1b965f10ca0a398e3943}\label{main_8cpp_a41237f84ef3a1b965f10ca0a398e3943} 
+\index{main.cpp@{main.cpp}!destructionCascade@{destructionCascade}}
+\index{destructionCascade@{destructionCascade}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{destructionCascade()}{destructionCascade()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} destruction\+Cascade (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat }\end{DoxyParamCaption})}
+
+
+
+destruction\+Cascade \+: la fonction vérifie si il y a un motif présent dans la matrice, et temps qu\textquotesingle{}un motif est présent elle apelle les détections qui ensuite apelleront les fonctions qui détruiront les motifs. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: la fonction renvoie la matrice apres modifications. 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_acf889a0827b874715f9ab027351d3299}\label{main_8cpp_acf889a0827b874715f9ab027351d3299} 
+\index{main.cpp@{main.cpp}!detectionExplosionUneBombeHorizontale@{detectionExplosionUneBombeHorizontale}}
+\index{detectionExplosionUneBombeHorizontale@{detectionExplosionUneBombeHorizontale}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{detectionExplosionUneBombeHorizontale()}{detectionExplosionUneBombeHorizontale()}}
+{\footnotesize\ttfamily bool detection\+Explosion\+Une\+Bombe\+Horizontale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat }\end{DoxyParamCaption})}
+
+
+
+detection\+Explosion\+Une\+Bombe\+Verticale \+:fonction booleen qui détecte s\textquotesingle{}il y a une suite d\textquotesingle{}au moins 3 caractères égaux à l\textquotesingle{}horizontale et apelle en conséquence la fonction pour casser le motif 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: la fonction renvoie true si un motif est présent à la verticale dans la matrice 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_ac3d3983f92d5935c2fabd420a05662ac}\label{main_8cpp_ac3d3983f92d5935c2fabd420a05662ac} 
+\index{main.cpp@{main.cpp}!detectionExplosionUneBombeHorizontaleVERIFICATION@{detectionExplosionUneBombeHorizontaleVERIFICATION}}
+\index{detectionExplosionUneBombeHorizontaleVERIFICATION@{detectionExplosionUneBombeHorizontaleVERIFICATION}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{detectionExplosionUneBombeHorizontaleVERIFICATION()}{detectionExplosionUneBombeHorizontaleVERIFICATION()}}
+{\footnotesize\ttfamily bool detection\+Explosion\+Une\+Bombe\+Horizontale\+VERIFICATION (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat }\end{DoxyParamCaption})}
+
+
+
+detection\+Explosion\+Une\+Bombe\+Horizontale\+VERIFICATION \+: La fonction fait comme l\textquotesingle{}autre détection horizontale elle vérifie si une suite est présente mais sans afficher les matrices. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: true si une suite est présente 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_adb646070b0e4491a586c6629f3612422}\label{main_8cpp_adb646070b0e4491a586c6629f3612422} 
+\index{main.cpp@{main.cpp}!detectionExplosionUneBombeVerticale@{detectionExplosionUneBombeVerticale}}
+\index{detectionExplosionUneBombeVerticale@{detectionExplosionUneBombeVerticale}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{detectionExplosionUneBombeVerticale()}{detectionExplosionUneBombeVerticale()}}
+{\footnotesize\ttfamily bool detection\+Explosion\+Une\+Bombe\+Verticale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat }\end{DoxyParamCaption})}
+
+
+
+detection\+Explosion\+Une\+Bombe\+Verticale \+:fonction booleen qui détecte s\textquotesingle{}il y a une suite d\textquotesingle{}au moins 3 caractères égaux à la verticale et apelle en conséquence la fonction pour casser le motif 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: la fonction renvoie true si un motif est présent à la verticale dans la matrice 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a9d1672e922b18ac07a00d56fed11cde0}\label{main_8cpp_a9d1672e922b18ac07a00d56fed11cde0} 
+\index{main.cpp@{main.cpp}!detectionExplosionUneBombeVerticaleVERIFICATION@{detectionExplosionUneBombeVerticaleVERIFICATION}}
+\index{detectionExplosionUneBombeVerticaleVERIFICATION@{detectionExplosionUneBombeVerticaleVERIFICATION}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{detectionExplosionUneBombeVerticaleVERIFICATION()}{detectionExplosionUneBombeVerticaleVERIFICATION()}}
+{\footnotesize\ttfamily bool detection\+Explosion\+Une\+Bombe\+Verticale\+VERIFICATION (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat }\end{DoxyParamCaption})}
+
+
+
+detection\+Explosion\+Une\+Bombe\+Verticale\+VERIFICATION 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a4322a24ff1cae51605b90001ccdfeb9e}\label{main_8cpp_a4322a24ff1cae51605b90001ccdfeb9e} 
+\index{main.cpp@{main.cpp}!droite@{droite}}
+\index{droite@{droite}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{droite()}{droite()}}
+{\footnotesize\ttfamily char droite (\begin{DoxyParamCaption}\item[{\textquotesingle{}d\textquotesingle{}}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a9e2b917e1830d49904d9131efee935f9}\label{main_8cpp_a9e2b917e1830d49904d9131efee935f9} 
+\index{main.cpp@{main.cpp}!estCoupJouable@{estCoupJouable}}
+\index{estCoupJouable@{estCoupJouable}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{estCoupJouable()}{estCoupJouable()}}
+{\footnotesize\ttfamily bool est\+Coup\+Jouable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}}}]{mat,  }\item[{\mbox{\hyperlink{type_8h_a9d6b4af46db0134117904d49af4996d4}{CInt}}}]{pair1,  }\item[{size\+\_\+t}]{ajout\+Ligne,  }\item[{size\+\_\+t}]{ajout\+Colonne }\end{DoxyParamCaption})}
+
+
+
+est\+Coup\+Jouable \+: la fonction vérifie si un coup est jouable c\textquotesingle{}est à dire si lors d\textquotesingle{}un changement de place de 2 caractères où les cases sont collées un motif apparait, ça voudrait dire que le coup est jouable. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+{\em pair1} & \+: la pair contenant la ligne et la colonne de la case initiale \\
+\hline
+{\em ajout\+Ligne} & \+: la valeur de la ligne à ajouter pour arriver à la case avec laquelle la case initiale doit échanger sa valeur \\
+\hline
+{\em ajout\+Colonne} & \+: la valeur de la colonne à ajouter pour arriver à la case avec laquelle la case initiale doit échanger sa valeur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a583aa590148d603ad15fe8ca0f1fa6ba}\label{main_8cpp_a583aa590148d603ad15fe8ca0f1fa6ba} 
+\index{main.cpp@{main.cpp}!explosionUneBombeHorizontale@{explosionUneBombeHorizontale}}
+\index{explosionUneBombeHorizontale@{explosionUneBombeHorizontale}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{explosionUneBombeHorizontale()}{explosionUneBombeHorizontale()}}
+{\footnotesize\ttfamily void explosion\+Une\+Bombe\+Horizontale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat,  }\item[{const size\+\_\+t \&}]{num\+Ligne,  }\item[{const size\+\_\+t \&}]{num\+Colonne,  }\item[{const size\+\_\+t \&}]{a\+La\+Suite }\end{DoxyParamCaption})}
+
+
+
+explosion\+Une\+Bombe\+Horizontale \+: la fonction nous permet de détruire les motifs de 3 lettres à l\textquotesingle{}horizontale, faire descendre les caractères du dessus , et regénérer des caractères en haut de la matrice. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+{\em num\+Ligne} & \+: la ligne à laquelle le motif se trouve \\
+\hline
+{\em num\+Colonne} & \+: la ligne à laquelle le motif commence \\
+\hline
+{\em a\+La\+Suite} & \+: la taille du motif \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a03f386e6f06c7819167bd1430a477e13}\label{main_8cpp_a03f386e6f06c7819167bd1430a477e13} 
+\index{main.cpp@{main.cpp}!explosionUneBombeVerticale@{explosionUneBombeVerticale}}
+\index{explosionUneBombeVerticale@{explosionUneBombeVerticale}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{explosionUneBombeVerticale()}{explosionUneBombeVerticale()}}
+{\footnotesize\ttfamily void explosion\+Une\+Bombe\+Verticale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat,  }\item[{const size\+\_\+t \&}]{num\+Ligne,  }\item[{const size\+\_\+t \&}]{num\+Colonne,  }\item[{const size\+\_\+t \&}]{a\+La\+Suite }\end{DoxyParamCaption})}
+
+
+
+explosion\+Une\+Bombe\+Verticale \+: cette fonction nous permet de détruire les motifs de 3 lettres à la verticale , faire descendre les caractères du dessus , et regénérer des caractères en haut de la matrice. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+{\em num\+Ligne} & \+: la ligne à laquelle le motif commence \\
+\hline
+{\em num\+Colonne} & \+: la colonne à laquelle le motif se trouve \\
+\hline
+{\em a\+La\+Suite} & \+: la taille du motif \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a51b4e2b6d810e99c596340187dc02644}\label{main_8cpp_a51b4e2b6d810e99c596340187dc02644} 
+\index{main.cpp@{main.cpp}!faitUnMouvement@{faitUnMouvement}}
+\index{faitUnMouvement@{faitUnMouvement}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{faitUnMouvement()}{faitUnMouvement()}}
+{\footnotesize\ttfamily bool fait\+Un\+Mouvement (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat,  }\item[{char}]{haut,  }\item[{char}]{gauche,  }\item[{char}]{bas,  }\item[{char}]{droite,  }\item[{char}]{inv }\end{DoxyParamCaption})}
+
+
+
+fait\+Un\+Mouvement \+: la fonction utilise des conditions pour pouvoir se déplacer dans la matrice (grille de jeu) et lorsqu\textquotesingle{}on appuie sur la touche pour rentrer en mode inversion, elle sauvegarde la case initiale et demande un déplacement pour savoir avec quelle case elle échagera sa valeur si le coup est jouabel , c\textquotesingle{}est-\/à-\/dire qu\textquotesingle{}il mène à la création d\textquotesingle{}un motif. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: la fonction renvoie true si un mouvement a été fait 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a2315391732383f8c6652037f0be8282f}\label{main_8cpp_a2315391732383f8c6652037f0be8282f} 
+\index{main.cpp@{main.cpp}!gauche@{gauche}}
+\index{gauche@{gauche}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{gauche()}{gauche()}}
+{\footnotesize\ttfamily char gauche (\begin{DoxyParamCaption}\item[{\textquotesingle{}q\textquotesingle{}}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a9c92e9a045a6c1840d4fbae99a0963f2}\label{main_8cpp_a9c92e9a045a6c1840d4fbae99a0963f2} 
+\index{main.cpp@{main.cpp}!haut@{haut}}
+\index{haut@{haut}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{haut()}{haut()}}
+{\footnotesize\ttfamily char haut (\begin{DoxyParamCaption}\item[{\textquotesingle{}z\textquotesingle{}}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_ab058cd47399b78d187003bc2a76980a3}\label{main_8cpp_ab058cd47399b78d187003bc2a76980a3} 
+\index{main.cpp@{main.cpp}!initMat@{initMat}}
+\index{initMat@{initMat}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{initMat()}{initMat()}}
+{\footnotesize\ttfamily void init\+Mat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat,  }\item[{const size\+\_\+t \&}]{nb\+Lignes = {\ttfamily 10},  }\item[{const size\+\_\+t \&}]{nb\+Colonnes = {\ttfamily 10},  }\item[{const unsigned \&}]{nb\+Max = {\ttfamily \mbox{\hyperlink{cst_8h_a7d0c8ee42c07e97113818539b3aa8f49}{KPlus\+Grand\+Nombre\+Dans\+La\+Matrice}}} }\end{DoxyParamCaption})}
+
+
+
+init\+Mat Cette fonction sert à initier la matrice en lui donnant un taille c\textquotesingle{}est à dire une longueur et une largeur ainsi que la valeur max qu\textquotesingle{}elle peut atteindre dans ses cases. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+{\em nb\+Lignes} & \+: le nombre de lignes de la matrice \\
+\hline
+{\em nb\+Colonnes} & \+: le nombre de colonnes de la matrice \\
+\hline
+{\em nb\+Max} & \+: la valeur max que peut atteindre \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a491bd3f0516027bbe9912a8cc64047d9}\label{main_8cpp_a491bd3f0516027bbe9912a8cc64047d9} 
+\index{main.cpp@{main.cpp}!inv@{inv}}
+\index{inv@{inv}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{inv()}{inv()}}
+{\footnotesize\ttfamily char inv (\begin{DoxyParamCaption}\item[{\textquotesingle{}i\textquotesingle{}}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_adfbaa271f44d828c6a42ce7e9affee88}\label{main_8cpp_adfbaa271f44d828c6a42ce7e9affee88} 
+\index{main.cpp@{main.cpp}!menuPrincipal@{menuPrincipal}}
+\index{menuPrincipal@{menuPrincipal}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{menuPrincipal()}{menuPrincipal()}}
+{\footnotesize\ttfamily void menu\+Principal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+menu\+Principal \+: Le menu principal affiché lors du début de la partie dans lequel on choisit le mode de jeu auquel on souhaite jouer. 
+
+\Hypertarget{main_8cpp_abf979a2cb4d3afaf02b3bd86db973e87}\label{main_8cpp_abf979a2cb4d3afaf02b3bd86db973e87} 
+\index{main.cpp@{main.cpp}!modeArcade@{modeArcade}}
+\index{modeArcade@{modeArcade}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{modeArcade()}{modeArcade()}}
+{\footnotesize\ttfamily void mode\+Arcade (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+mode\+Arcade \+: la fonction lance le mode de jeu arcade, une partie avec un timer de 2 minutes (120 secondes) ou le joueur doit faire le plus de points en 2 mins. 
+
+\Hypertarget{main_8cpp_ae6cae7ab7bff82b1db65edaa7d10a1ea}\label{main_8cpp_ae6cae7ab7bff82b1db65edaa7d10a1ea} 
+\index{main.cpp@{main.cpp}!modeCreatif@{modeCreatif}}
+\index{modeCreatif@{modeCreatif}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{modeCreatif()}{modeCreatif()}}
+{\footnotesize\ttfamily void mode\+Creatif (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+mode\+Creatif \+: la fonction sert à jouer au mode créatif, le mode ou on choisit les règles de son propre jeu avec un temps, un nombre d\textquotesingle{}essai, la taille de la grille de jeu et le nombre de points minimum pour gagner. 
+
+\Hypertarget{main_8cpp_ab71099eed2c34b3ea2dbde2c70ea3e6c}\label{main_8cpp_ab71099eed2c34b3ea2dbde2c70ea3e6c} 
+\index{main.cpp@{main.cpp}!modeNiveau@{modeNiveau}}
+\index{modeNiveau@{modeNiveau}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{modeNiveau()}{modeNiveau()}}
+{\footnotesize\ttfamily void mode\+Niveau (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+mode\+Niveau \+: la fonction apelle la fonction qui permet de choisir le niveau de difficulté et initie la matrice en conséquence puis apelle la fonction qui simule la partie. 
+
+\Hypertarget{main_8cpp_a22f6f19e755977195b51766e13f8eec7}\label{main_8cpp_a22f6f19e755977195b51766e13f8eec7} 
+\index{main.cpp@{main.cpp}!partieModeNiveau@{partieModeNiveau}}
+\index{partieModeNiveau@{partieModeNiveau}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{partieModeNiveau()}{partieModeNiveau()}}
+{\footnotesize\ttfamily void partie\+Mode\+Niveau (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat }\end{DoxyParamCaption})}
+
+
+
+partie\+Mode\+Niveau \+: Cette fonction simule une partie dans ce mode de jeu ou le joueur doit faire + de 50 points. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_ac2f44dfb97d1fa879f79a524d5852499}\label{main_8cpp_ac2f44dfb97d1fa879f79a524d5852499} 
+\index{main.cpp@{main.cpp}!superExplosionVerticale@{superExplosionVerticale}}
+\index{superExplosionVerticale@{superExplosionVerticale}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{superExplosionVerticale()}{superExplosionVerticale()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} super\+Explosion\+Verticale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}}}]{mat,  }\item[{const size\+\_\+t \&}]{colonne }\end{DoxyParamCaption})}
+
+
+
+super\+Explosion\+Horizontale \+: Cette fonction nous permet de casser une ligne entière lorsqu\textquotesingle{}une super suite est détectée, elle casse toute la ligne et ensuite fait descendre tous les caractère du dessus et regénère des caractères sur la ligne du dessus. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+{\em ligne} & \+: la ligne du motif \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\+: renvoie la matrice après modification 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_af05630e0f6fa515386eb4b2e0aaf3622}\label{main_8cpp_af05630e0f6fa515386eb4b2e0aaf3622} 
+\index{main.cpp@{main.cpp}!testSwitch@{testSwitch}}
+\index{testSwitch@{testSwitch}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{testSwitch()}{testSwitch()}}
+{\footnotesize\ttfamily void test\+Switch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{type_8h_a37304a67fccb047666efd38e9c84d9bf}{CMatrice}} \&}]{mat }\end{DoxyParamCaption})}
+
+
+
+test\+Switch \+: la fonction nous dit de faire un mouvement et apelle fait\+Un\+Mouvement. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em mat} & \+: la matrice \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Documentation des variables}
+\Hypertarget{main_8cpp_a4c60b2b36f563b5b7306cc5e8227f7d6}\label{main_8cpp_a4c60b2b36f563b5b7306cc5e8227f7d6} 
+\index{main.cpp@{main.cpp}!colonneAct@{colonneAct}}
+\index{colonneAct@{colonneAct}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{colonneAct}{colonneAct}}
+{\footnotesize\ttfamily size\+\_\+t colonne\+Act =2}
+
+\Hypertarget{main_8cpp_af6e55345628a5173ee4bd649c47f72d5}\label{main_8cpp_af6e55345628a5173ee4bd649c47f72d5} 
+\index{main.cpp@{main.cpp}!ligneAct@{ligneAct}}
+\index{ligneAct@{ligneAct}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{ligneAct}{ligneAct}}
+{\footnotesize\ttfamily size\+\_\+t ligne\+Act = 2}
+
+\Hypertarget{main_8cpp_ac8a6a912ac3c8ae0e42ec2b876b950d0}\label{main_8cpp_ac8a6a912ac3c8ae0e42ec2b876b950d0} 
+\index{main.cpp@{main.cpp}!nombreEssaisRestants@{nombreEssaisRestants}}
+\index{nombreEssaisRestants@{nombreEssaisRestants}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{nombreEssaisRestants}{nombreEssaisRestants}}
+{\footnotesize\ttfamily size\+\_\+t nombre\+Essais\+Restants = 5}
+
+\Hypertarget{main_8cpp_af50a26031d2746d8afdef8e837cf7a6d}\label{main_8cpp_af50a26031d2746d8afdef8e837cf7a6d} 
+\index{main.cpp@{main.cpp}!partieCommence@{partieCommence}}
+\index{partieCommence@{partieCommence}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{partieCommence}{partieCommence}}
+{\footnotesize\ttfamily bool partie\+Commence = false}
+
+\Hypertarget{main_8cpp_afb58707a2be7d1f8a88390c3f23df877}\label{main_8cpp_afb58707a2be7d1f8a88390c3f23df877} 
+\index{main.cpp@{main.cpp}!score@{score}}
+\index{score@{score}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily size\+\_\+t score = 0}
+
